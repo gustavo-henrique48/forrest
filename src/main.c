@@ -45,16 +45,11 @@ void getGameScreen(GameScreen *screen, GameState *state, Player *player) {
         *state = PAUSED;
     } 
 
-    if(IsKeyPressed(KEY_ENTER)){
+    if(IsKeyReleased(KEY_ENTER)){
         checkPlayerHealth(screen, state, player);
     } 
 
     
-}
-
-void drawGame(){
-    ClearBackground(GREEN);
-    DrawText("THE FOREST", 200, 280, 40, WHITE);
 }
 
 void checkPlayerHealth(GameScreen *screen, GameState *state, Player *player){
@@ -62,12 +57,17 @@ void checkPlayerHealth(GameScreen *screen, GameState *state, Player *player){
         *state = GAMEOVER;
         *screen = LOST;
         drawGameScreenGameOver();
-    } else {
-        *state = RUNNING;
-        *screen = GAMEPLAY;
-        drawGame();
-    }
-    if(IsKeyPressed(KEY_BACKSPACE)) player->health = player->health - 1; 
+    }         
+    //*state = RUNNING;
+    //*screen = GAMEPLAY;
+    //drawGame();
+
+    if(IsKeyPressed(KEY_F)) player->health = player->health - 1; 
+}
+
+void drawGame(){
+    ClearBackground(GREEN);
+    DrawText("THE FOREST", 200, 280, 40, WHITE);
 }
 
 void drawGameScreenTitle(){
